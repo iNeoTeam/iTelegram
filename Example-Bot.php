@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 if(!file_exists("iClass.php")){
-    copy("https://ineo-team.ir/iNeoTeamBot.phar", "iClass.php");
+    copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iClass.php");
 }
 require_once('iClass.php');
 use iTelegram\Bot;
@@ -20,7 +20,7 @@ if($text == "/start"){
 }elseif($text == "/update"){
 	$r = $bot->sendMessage($chat_id, "*Please wait ...*", "MarkDown", true);
 	rename("iClass.php", rand(10000, 99999).".php");
-	copy("https://ineo-team.ir/iNeoTeamBot.phar", "iClass.php");
+	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iClass.php");
 	sleep(2); // for example
 	$bot->deleteMessage($chat_id, $r->result->message_id);
 	$bot->sendMessage($chat_id, "<b>New class loaded successfully.</b>", "HTML", true, $message_id);
