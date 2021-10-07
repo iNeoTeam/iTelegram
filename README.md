@@ -16,7 +16,7 @@ To learn how to create and set up a bot, please consult <a href="https://core.te
 ```php
 use iTelegram\Bot;
 if (!file_exists('iTelegram.php')) {
-	copy('https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar', 'iTelegram.php');
+    copy('https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar', 'iTelegram.php');
 }
 require_once('iTelegram.php');
 $bot		= new Bot();
@@ -29,7 +29,7 @@ $bot->Authentification("BOT_ACCESS_TOKEN");
 <?php
 error_reporting(0);
 if(!file_exists("iTelegram.php")){
-	copy('https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar', 'iTelegram.php'); // Copy from GitHub
+    copy('https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar', 'iTelegram.php');
 }
 require_once('iTelegram.php');
 use iTelegram\Bot;
