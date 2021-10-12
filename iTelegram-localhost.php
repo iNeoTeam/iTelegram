@@ -39,7 +39,7 @@ class Bot{
 			curl_setopt($cURL, CURLOPT_URL, $api);
 			curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($cURL, CURLOPT_POSTFIELDS, $data);
-      curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
+      			curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
 			$result = curl_exec($cURL);
 			if(curl_error($cURL)){
 				var_dump(curl_error($cURL));
@@ -48,6 +48,7 @@ class Bot{
 			}
 		}
 	}
+	function TelegramAPI($method, $data = []){ return iNeoTeamBot($method, $data); }
 	function editMessage($chatID, $messageID, $text, $mode = null, $webPage = null, $button = null){
 		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
 			$mode = "html";
