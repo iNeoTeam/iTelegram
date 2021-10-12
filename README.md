@@ -28,6 +28,8 @@ $bot->Authentification("BOT_ACCESS_TOKEN");
 ```php
 <?php
 error_reporting(0);
+set_time_limit(0);
+ob_start();
 if(!file_exists("iTelegram.php")){
     copy('https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar', 'iTelegram.php');
 }
