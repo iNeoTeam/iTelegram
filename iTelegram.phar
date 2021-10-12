@@ -39,6 +39,7 @@ class Bot{
 			curl_setopt($cURL, CURLOPT_URL, $api);
 			curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($cURL, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
 			$result = curl_exec($cURL);
 			if(curl_error($cURL)){
 				var_dump(curl_error($cURL));
@@ -85,6 +86,16 @@ class Bot{
 			'photo' => $photo,
 			'caption' => $caption,
 			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button
+		]);
+		return $output;
+	}
+	function sendSticker($chat_id, $sticker, $notification = null, $replyTo = null, $button = null){
+		$output = iNeoTeamBot('sendSticker', [
+			'chat_id' => $chat_id,
+			'sticker' => $sticker,
 			'disable_notification' => $notification,
 			'reply_to_message_id' => $replyTo,
 			'reply_markup' => $button
@@ -165,6 +176,7 @@ class Bot{
 		]);
 		return $output;
 	}
+	function TelegramAPI($method, $data = []){ return iNeoTeamBot($method, $data); }
 	function getMe(){ return iNeoTeamBot('getMe'); }
 	function deleteWebHook($sourceUrl){ return iNeoTeamBot('deleteWebHook', ['url' => $sourceUrl]); }
 	function setWebHook($sourceUrl){ return iNeoTeamBot('setWebHook', ['url' => $sourceUrl]); }
@@ -185,6 +197,7 @@ class Bot{
 	public function getChatTitle(){ return $this->data['message']['chat']['title']; }
 	public function getChatType(){ return $this->data['message']['chat']['type']; }
 	public function Text(){ return $this->data['message']['text']; }
+	public function Update(){ return $this->data; }
 	public function Caption(){ return $this->data['message']['caption']; }
 	public function Username(){ return $this->data['message']['from']['username']; }
 	public function Firstname(){ return $this->data['message']['from']['first_name']; }
@@ -220,6 +233,9 @@ class Bot{
 				$fileId = $this->data['message'][$type]['file_id'];
 				break;
 			case 'document';
+				$fileId = $this->data['message'][$type]['file_id'];
+				break;
+			case 'sticker';
 				$fileId = $this->data['message'][$type]['file_id'];
 				break;
 		}
