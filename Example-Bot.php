@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
-if(!file_exists("iClass.php")){
-    copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iClass.php");
+if(!file_exists("iTelegram.php")){
+    copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
 }
-require_once('iClass.php');
+require_once('iTelegram.php');
 use iTelegram\Bot;
 define('API_KEY', "BOT_ACCESS_TOKEN");
 
