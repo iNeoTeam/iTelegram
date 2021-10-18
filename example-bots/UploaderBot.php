@@ -116,7 +116,7 @@ if($text == "/start" or $text == "/start 1"){
 	}elseif($type == "document"){
 		$r = $bot->sendDocument($chat_id, $fileId, $caption, null, "HTML", null, $message_id, $button);
 	}elseif($type == "voice"){
-		$r = $bot->sendVoice($chat_id, $fileId, $caption, "HTML", null, $message_id, $button);
+		$r = $bot->sendVoice($chat_id, $fileId, $caption, null, "HTML", null, $message_id, $button);
 	}else{
 		$message = "❌ورودی مورد نظر جز رسانه های معتبر نیست.\n➖➖➖➖➖➖➖➖\n📣 @$channel";
 		$r = $bot->sendMessage($chat_id, $message, "HTML", true, $message_id, $button);
