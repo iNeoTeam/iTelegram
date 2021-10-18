@@ -203,7 +203,12 @@ class Bot{
 	public function Lastname(){ return $this->data['message']['from']['last_name']; }
 	public function UserId(){ return $this->data['message']['from']['id']; }
 	public function MessageId(){ return $this->data['message']['message_id']; }
+	public function getInlineChatId(){ return $this->data['callback_query']['message']['chat']['id']; }
 	public function InlineMessageId(){ return $this->data['callback_query']['message']['message_id']; }
+	public function InlineUsername(){ return $this->data['callback_query']['message']['from']['username']; }
+	public function InlineFirstname(){ return $this->data['callback_query']['message']['from']['first_name']; }
+	public function InlineLastname(){ return $this->data['callback_query']['message']['from']['last_name']; }
+	public function InlineUserId(){ return $this->data['callback_query']['message']['from']['id']; }
 	public function ForwarderId(){ return $this->data['message']['reply_to_message']['forward_from']['id']; }
 	public function InputMessageType(){
 		if(isset($this->data['message']['text'])){ return self::TEXT; }
