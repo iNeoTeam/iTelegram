@@ -48,7 +48,6 @@ class Bot{
 			}
 		}
 	}
-	function TelegramAPI($method, $data = []){ return iNeoTeamBot($method, $data); }
 	function editMessage($chatID, $messageID, $text, $mode = null, $webPage = null, $button = null){
 		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
 			$mode = "html";
