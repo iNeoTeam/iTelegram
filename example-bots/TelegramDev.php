@@ -84,8 +84,9 @@ if($text == "/start"){
 	$message = "🖐سلام <a href='tg://user?id=$chat_id'>$firstname</a> عزیز.\nبه ربات مدیریت حساب تلگرام خوش آمدید.\n\nاز دکمه های زیر استفاده کنید.";
 	if(in_array($chat_id, $admins)){
 		$homeButton = json_decode($homeButton, true);
-		$homeButton['inline_keyboard'][2][0]['text'] = "🖥ورود به پنل مدیریت ربات";
-		$homeButton['inline_keyboard'][2][0]['callback_data'] = "adminlogin";
+		$c = count($homeButton['inline_keyboard']);
+		$homeButton['inline_keyboard'][$c][0]['text'] = "🖥ورود به پنل مدیریت ربات";
+		$homeButton['inline_keyboard'][$c][0]['callback_data'] = "adminlogin";
 		$homeButton = json_encode($homeButton);
 	}
 	$r = $bot->sendMessage($chat_id, $message, "HTML", true, $message_id, $homeButton);
@@ -95,8 +96,9 @@ if($text == "/start"){
 	$message = "🖐سلام <a href='tg://user?id=$chatID'>$firstname2</a> عزیز.\nبه ربات مدیریت حساب تلگرام خوش آمدید.\n\nاز دکمه های زیر استفاده کنید.";
 	if(in_array($chatID, $admins)){
 		$homeButton = json_decode($homeButton, true);
-		$homeButton['inline_keyboard'][2][0]['text'] = "🖥ورود به پنل مدیریت ربات";
-		$homeButton['inline_keyboard'][2][0]['callback_data'] = "adminlogin";
+		$c = count($homeButton['inline_keyboard']);
+		$homeButton['inline_keyboard'][$c][0]['text'] = "🖥ورود به پنل مدیریت ربات";
+		$homeButton['inline_keyboard'][$c][0]['callback_data'] = "adminlogin";
 		$homeButton = json_encode($homeButton);
 	}
 	$r = $bot->editMessage($chatID, $messageID, $message, "HTML", true, $homeButton);
