@@ -275,7 +275,7 @@ if($text == "/start"){
 	##################################################################################
 }elseif(isset($text) && getStep($chat_id) == "getTitle"){
 	step($chat_id, "getShortname");
-	$login = json_decode(file_get_contents("db/$chatID/login.json"), true);
+	$login = json_decode(file_get_contents("db/$chat_id/login.json"), true);
 	$i = ['title' => $text, 'shortName' => null, 'url' => null, 'platform' => null, 'phone' => $login['phone']];
 	file_put_contents("db/$chat_id/r.json", json_encode($i));
 	$message = "✏️یک نام کوتاه برای برنامه خود انتخاب کنید.";
@@ -310,9 +310,9 @@ if($text == "/start"){
 	$i = json_decode(file_get_contents("db/$chatID/r.json"), true);
 	unlink("db/$chatID/r.json");
 	$i['platform'] = $data;
-	file_put_contents("db/$chatID/register.json", json_encode($i));
 	$get = Request("createapp", $i);
 	if($get['status'] == "successfully."){
+		file_put_contents("db/$chatID/register.json", json_encode($i));
 		$message = "✅ثبت نام برنامه با موفقیت انجام شد.\n\n10جهت دریافت اطلاعات ثبت نام، از منو اصلی اقدام کنید.";
 	}else{
 		$message = "❗️خطا در ساخت برنامه.\n\nبا پشتیبانی در ارتباط باشید.";
@@ -450,5 +450,6 @@ if($text == "/start"){
 	$message = "✅پیام مورد نظر با موفقیت به همه کاربران فوروارد شد.";
 	$bot->sendMessage($chat_id, $message, "HTML", true, null, $backButton2);
 	##################################################################################
-}unlink("error_log");
+}
+unlink("error_log");
 ?>
