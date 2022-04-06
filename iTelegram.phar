@@ -8,7 +8,6 @@
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
 **/
-error_reporting(0);
 namespace iTelegram;
 class Bot{
 	const VERSION			= '1.7.1';
