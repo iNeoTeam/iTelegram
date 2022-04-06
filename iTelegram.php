@@ -2,7 +2,7 @@
 /**
 	* @author:		iNeoTeam
 	* @copyright:	2018-2021 Sir.4m1R
-	* @version:		1.6.3
+	* @version:		1.7.1
 	* @contact:		T.me/CrossXss
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
@@ -11,6 +11,7 @@
 namespace iTelegram;
 error_reporting(0);
 class Bot{
+	const VERSION			= '1.7.1';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -211,6 +212,7 @@ class Bot{
 	public function InlineLastname(){ return $this->data['callback_query']['message']['chat']['last_name']; }
 	public function InlineUserId(){ return $this->data['callback_query']['message']['chat']['id']; }
 	public function ForwarderId(){ return $this->data['message']['reply_to_message']['forward_from']['id']; }
+	public function version(){ return self::VERSION; }
 	public function InputMessageType(){
 		if(isset($this->data['message']['text'])){ return self::TEXT; }
 		if(isset($this->data['message']['photo'])){ return self::PHOTO; }
