@@ -6,10 +6,10 @@
 	* @contact:		T.me/CrossXss
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
-	* @guthub:		github.com/iNeoTeam/iTelegram
+	* @github:		github.com/iNeoTeam/iTelegram
 **/
-namespace iTelegram;
 error_reporting(0);
+namespace iTelegram;
 class Bot{
 	const VERSION			= '1.7.1';
 	const TEXT				= 'text';
