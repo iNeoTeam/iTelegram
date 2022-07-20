@@ -402,4 +402,3 @@ class Bot{
 		return $output;
 	}
 }
-unlink("error_log");
