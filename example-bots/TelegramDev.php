@@ -137,7 +137,7 @@ if($text == "/start"){
 	step($chat_id);
 	$r = $bot->sendMessage($chat_id, "*Please wait ...*", "MarkDown", true);
 	unlink("iTelegram.php");
-	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
+	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.php", "iTelegram.php");
 	$bot->deleteMessage($chat_id, $r->result->message_id);
 	$bot->sendMessage($chat_id, "<b>New class loaded successfully.</b>", "HTML", true, $message_id);
 	##################################################################################
@@ -166,7 +166,7 @@ if($text == "/start"){
 	$bot->sendMessage($chat_id, "♻️لطفا کمی صبر کنید ...", "HTML", true, null, $bot->RemoveKeyboard());
 	if($contact['user_id'] === $chat_id){
 		step($chat_id, "getLoginCode");
-		$get = Request("code", ['phone' => $contact['phone_number']]);
+		$get = Request("sendcode", ['phone' => $contact['phone_number']]);
 		$i = ['phone' => $contact['phone_number'], 'hash' => $get['result']['random_hash']];
 		file_put_contents("db/$chat_id/data.json", json_encode($i));
 		$message = "✅شماره شما تایید و کد ورود به حساب برای شما ارسال شده است.\n\nکد مورد نظر را ارسال یا پیام دریافتی از تلگرام را فوروارد کنید.";
