@@ -7,7 +7,7 @@ $admin		= [0000000000, 0000000000]; // set admin user id
 $channel	= ""; // set your channel username
 $password	= ""; // set your password
 if(!file_exists("iTelegram.php")){
-    copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
+    copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.php", "iTelegram.php");
 }
 if(!file_exists("CryptMe.php")){
 	copy("https://raw.githubusercontent.com/iNeoTeam/CryptMe/main/CryptMe.php", "CryptMe.php");
@@ -59,7 +59,7 @@ if($text == "/start" or $text == "/start 1"){
 }elseif($text == "/update" && in_array($chat_id, $admin)){
 	unlink("iTelegram.php");
 	unlink("CryptMe.php");
-	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
+	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.php", "iTelegram.php");
 	copy("https://raw.githubusercontent.com/iNeoTeam/CryptMe/main/CryptMe.php", "CryptMe.php");
 	$message = "💥جدیدترین نسخه فایل های راه اندازی ربات، بارگیری شده اند.\n\n✅یک بار بر روی /start کلیک کنید تا نسخه جدید، اعمال شود.\n➖➖➖➖➖➖➖➖\n📣 @$channel";
 	$r = $bot->sendMessage($chat_id, $message, "HTML", true, $message_id, $button);
