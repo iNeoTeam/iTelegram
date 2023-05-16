@@ -48,10 +48,7 @@ class Bot{
 			}
 		}
 	}
-	function editMessage($chatID, $messageID, $text, $mode = null, $webPage = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function editMessage($chatID, $messageID, $text, $mode = "html", $webPage = null, $button = null){
 		$output = iNeoTeamBot('editMessageText', [
 			'chat_id' => $chatID,
 			'message_id' => $messageID,
@@ -62,10 +59,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendMessage($chat_id, $text, $mode = null, $webPage = null, $replyTo = null, $button = null, $protect_content = false){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendMessage($chat_id, $text, $mode = "html", $webPage = null, $replyTo = null, $button = null, $protect_content = false){
 		$output = iNeoTeamBot('sendMessage', [
 			'chat_id' => $chat_id,
 			'text' => $text,
@@ -77,10 +71,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendPhoto($chat_id, $photo, $caption = null, $mode = null, $notification = null, $replyTo = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendPhoto($chat_id, $photo, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
 		$output = iNeoTeamBot('sendPhoto', [
 			'chat_id' => $chat_id,
 			'photo' => $photo,
@@ -102,10 +93,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendVideo($chat_id, $video, $caption = null, $mode = null, $notification = null, $replyTo = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendVideo($chat_id, $video, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
 		$output = iNeoTeamBot('sendVideo', [
 			'chat_id' => $chat_id,
 			'video' => $video,
@@ -117,10 +105,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendAudio($chat_id, $audio, $caption = null, $duration = null, $title = null, $performer = null, $thumb = null, $mode = null, $notification = null, $replyTo = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendAudio($chat_id, $audio, $caption = null, $duration = null, $title = null, $performer = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
 		$output = iNeoTeamBot('sendAudio', [
 			'chat_id' => $chat_id,
 			'audio' => $audio,
@@ -136,10 +121,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendVoice($chat_id, $voice, $caption = null, $duration = null, $mode = null, $notification = null, $replyTo = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendVoice($chat_id, $voice, $caption = null, $duration = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
 		$output = iNeoTeamBot('sendVoice', [
 			'chat_id' => $chat_id,
 			'voice' => $voice,
@@ -152,10 +134,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendDocument($chat_id, $document, $caption = null, $thumb = null, $mode = null, $notification = null, $replyTo = null, $button = null){
-		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
-			$mode = "html";
-		}
+	function sendDocument($chat_id, $document, $caption = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
 		$output = iNeoTeamBot('sendDocument', [
 			'chat_id' => $chat_id,
 			'document' => $document,
@@ -368,16 +347,11 @@ class Bot{
 		if(isset($this->data['callback_query'])){ return self::CALLBACK_QUERY; }
 		if(isset($this->data['inline_query'])){ return self::INLINE_QUERY; }
 	}
-	function AnswerCallBack($callback_id, $text, $alert = null){
-		if($alert == 1 or $alert == true){
-			$_alert = true;
-		}else{
-			$_alert = false;
-		}
+	function AnswerCallBack($callback_id, $text, $alert = false){
 		$output = iNeoTeamBot('answerCallbackQuery', [
 			'callback_query_id' => $callback_id,
 			'text' => $text,
-			'show_alert' => $_alert
+			'show_alert' => $alert
 		]);
 		return $output;
 	}
@@ -388,16 +362,11 @@ class Bot{
 			'result' => json_encode($data)
 		]);
 	}
-	function pinMessage($chat_id, $message_id, $notification = null){
-		if($notification == 1 or $notification == true){
-			$_notification = true;
-		}else{
-			$_notification = false;
-		}
+	function pinMessage($chat_id, $message_id, $notification = false){
 		$output = iNeoTeamBot('pinChatMessage', [
 			'chat_id' => $chat_id,
 			'message_id' => $message_id,
-			'disable_notification' => $_notification
+			'disable_notification' => $notification
 		]);
 		return $output;
 	}
