@@ -6,7 +6,7 @@ $token			= "TOKEN";
 $admin			= 123456789;
 $channel		= "iNeoTeam";
 if(!file_exists("iTelegram.php")){
-	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
+	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.php", "iTelegram.php");
 }
 require_once("iTelegram.php");
 use iTelegram\Bot;
