@@ -1,16 +1,15 @@
 <?php
 /**
 	* @author:		iNeoTeam
-	* @copyright:	2018-2021 Sir.4m1R
-	* @version:		1.7.1
-	* @contact:		T.me/CrossXss
+	* @copyright:	2018-2021 (C) Sir.4m1R
+	* @version:		1.7.2
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
 **/
 namespace iTelegram;
 class Bot{
-	const VERSION			= '1.7.1';
+	const VERSION			= '1.7.2';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -63,7 +62,7 @@ class Bot{
 		]);
 		return $output;
 	}
-	function sendMessage($chat_id, $text, $mode = null, $webPage = null, $replyTo = null, $button = null){
+	function sendMessage($chat_id, $text, $mode = null, $webPage = null, $replyTo = null, $button = null, $protect_content = false){
 		if($mode == "" or !in_array(strtolower($mode), ['markdown', 'html'])){
 			$mode = "html";
 		}
@@ -73,7 +72,8 @@ class Bot{
 			'parse_mode' => $mode,
 			'disable_web_page_preview' => $webPage,
 			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
 		]);
 		return $output;
 	}
