@@ -25,6 +25,8 @@ $bot->Authentification("BOT_ACCESS_TOKEN");
 
 <h2>Example PHP Bot:</h2>
 
+[Other Example Bots](https://github.com/iNeoTeam/TelegramBots)
+
 ```php
 <?php
 error_reporting(0);
