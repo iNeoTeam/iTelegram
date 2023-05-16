@@ -8,7 +8,7 @@ $channel	= "";
 $authKey	= "@";							//get from: T.me/TManageBot?start=dev
 $api		= "https://api.ineo-team.ir";	//don't change it !
 if(!file_exists("iTelegram.php")){
-	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.phar", "iTelegram.php");
+	copy("https://raw.githubusercontent.com/iNeoTeam/iTelegram/main/iTelegram.php", "iTelegram.php");
 }
 if(file_exists("db/auth.txt")){
 	$authKey = file_get_contents("db/auth.txt");
