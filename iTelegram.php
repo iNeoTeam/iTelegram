@@ -2,7 +2,7 @@
 /**
 	* @author:		iNeoTeam
 	* @copyright:	2018-2021 (C) Sir.4m1R
-	* @version:		1.7.2
+	* @version:		1.7.3
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
