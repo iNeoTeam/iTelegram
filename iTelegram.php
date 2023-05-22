@@ -157,6 +157,7 @@ class Bot{
 	}
 	function TelegramAPI($method, $data = []){ return iNeoTeamBot($method, $data); }
 	function getMe(){ return iNeoTeamBot('getMe'); }
+	function getWebHookInfo(){ return iNeoTeamBot("getWebHookInfo"); }
 	function deleteWebHook($sourceUrl){ return iNeoTeamBot('deleteWebHook', ['url' => $sourceUrl]); }
 	function setWebHook($sourceUrl){ return iNeoTeamBot('setWebHook', ['url' => $sourceUrl]); }
 	function deleteMessage($chat_id, $message_id){ return iNeoTeamBot('deleteMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
