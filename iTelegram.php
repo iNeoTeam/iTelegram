@@ -1,15 +1,17 @@
 <?php
 /**
-	* @author:		iNeoTeam
-	* @copyright:	2018-2021 (C) Sir.4m1R
-	* @version:		1.7.3
+	* @author:		Sir.4m1R
+	* @team:		iNeoTeam
+	* @copyright:	2018-2023 (C) iNeoTeam
+	* @version:		1.8.5
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
+	* @examples:	github.com/iNeoTeam/TelegramBots
 **/
 namespace iTelegram;
 class Bot{
-	const VERSION			= '1.7.2';
+	const VERSION			= '1.8.5';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -33,139 +35,39 @@ class Bot{
 	}
 	public function Authentification($token){
 		define('ACCESS_TOKEN', $token);
-		function iNeoTeamBot($method, $data = []){
+		function iNeoTeamBot($method, $parameters = []){
 			$api = "https://api.telegram.org/bot".ACCESS_TOKEN."/".$method;
 			$cURL = curl_init();
 			curl_setopt($cURL, CURLOPT_URL, $api);
 			curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($cURL, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($cURL, CURLOPT_POSTFIELDS, $parameters);
 			curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
-			$result = curl_exec($cURL);
-			if(curl_error($cURL)){
-				var_dump(curl_error($cURL));
-			}else{
-				return json_decode($result);
-			}
+			$result = curl_exec($cURL); curl_close($cURL);
+			return json_decode($result);
 		}
 	}
-	function editMessage($chatID, $messageID, $text, $mode = "html", $webPage = null, $button = null){
-		$output = iNeoTeamBot('editMessageText', [
-			'chat_id' => $chatID,
-			'message_id' => $messageID,
-			'text' => $text,
-			'parse_mode' => $mode,
-			'disable_web_page_preview' => $webPage,
-			'reply_markup' => $button
-		]);
-		return $output;
+	public function API($token, $method, $parameters = []){
+		$api = "https://api.telegram.org/bot$token/$method";
+		$cURL = curl_init();
+		curl_setopt($cURL, CURLOPT_URL, $api);
+		curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($cURL, CURLOPT_POSTFIELDS, $parameters);
+		curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
+		$result = curl_exec($cURL); curl_close($cURL);
+		return json_decode($result);
 	}
-	function sendMessage($chat_id, $text, $mode = "html", $webPage = null, $replyTo = null, $button = null, $protect_content = false){
-		$output = iNeoTeamBot('sendMessage', [
-			'chat_id' => $chat_id,
-			'text' => $text,
-			'parse_mode' => $mode,
-			'disable_web_page_preview' => $webPage,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button,
-			'protect_content' => $protect_content
-		]);
-		return $output;
-	}
-	function sendPhoto($chat_id, $photo, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendPhoto', [
-			'chat_id' => $chat_id,
-			'photo' => $photo,
-			'caption' => $caption,
-			'parse_mode' => $mode,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function sendSticker($chat_id, $sticker, $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendSticker', [
-			'chat_id' => $chat_id,
-			'sticker' => $sticker,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function sendVideo($chat_id, $video, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendVideo', [
-			'chat_id' => $chat_id,
-			'video' => $video,
-			'caption' => $caption,
-			'parse_mode' => $mode,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function sendAudio($chat_id, $audio, $caption = null, $duration = null, $title = null, $performer = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendAudio', [
-			'chat_id' => $chat_id,
-			'audio' => $audio,
-			'caption' => $caption,
-			'duration' => $duration,
-			'title' => $title,
-			'performer' => $performer,
-			'thumb' => $thumb,
-			'parse_mode' => $mode,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function sendVoice($chat_id, $voice, $caption = null, $duration = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendVoice', [
-			'chat_id' => $chat_id,
-			'voice' => $voice,
-			'caption' => $caption,
-			'duration' => $duration,
-			'parse_mode' => $mode,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function sendDocument($chat_id, $document, $caption = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null){
-		$output = iNeoTeamBot('sendDocument', [
-			'chat_id' => $chat_id,
-			'document' => $document,
-			'caption' => $caption,
-			'thumb' => $thumb,
-			'parse_mode' => $mode,
-			'disable_notification' => $notification,
-			'reply_to_message_id' => $replyTo,
-			'reply_markup' => $button
-		]);
-		return $output;
-	}
-	function forwardMessage($toChat_id, $fromChat_id, $message_id){
-		$output = iNeoTeamBot('forwardMessage', [
-			'chat_id' => $toChat_id,
-			'from_chat_id' => $fromChat_id,
-			'message_id' => $message_id
-		]);
-		return $output;
-	}
-	function TelegramAPI($method, $data = []){ return iNeoTeamBot($method, $data); }
-	function getMe(){ return iNeoTeamBot('getMe'); }
-	function getWebHookInfo(){ return iNeoTeamBot("getWebHookInfo"); }
-	function deleteWebHook($sourceUrl){ return iNeoTeamBot('deleteWebHook', ['url' => $sourceUrl]); }
-	function setWebHook($sourceUrl){ return iNeoTeamBot('setWebHook', ['url' => $sourceUrl]); }
-	function deleteMessage($chat_id, $message_id){ return iNeoTeamBot('deleteMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
-	function sendChatAction($chat_id, $actionType){ return iNeoTeamBot('sendChatAction', ['chat_id' => $chat_id, 'action' => $actionType]); }
-	function getChatMember($chat_id, $user_id){ return iNeoTeamBot('getChatMember', ['chat_id' => $chat_id, 'user_id' => $user_id]); }
-	function getChatMemberCount($chat_id){ return iNeoTeamBot('getChatMemberCount', ['chat_id' => $chat_id]); }
-	function unPinMessage($chat_id, $message_id){ return iNeoTeamBot('unpinChatMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
-	function unPinAllMessages($chat_id){ return iNeoTeamBot('unpinAllChatMessages', ['chat_id' => $chat_id]); }
+	public function TelegramAPI($method, $parameters = []){ return iNeoTeamBot($method, $parameters); }
+	public function getMe(){ return iNeoTeamBot('getMe'); }
+	public function getWebHookInfo(){ return iNeoTeamBot("getWebHookInfo"); }
+	public function deleteWebHook($sourceUrl){ return iNeoTeamBot('deleteWebHook', ['url' => $sourceUrl]); }
+	public function setWebHook($sourceUrl){ return iNeoTeamBot('setWebHook', ['url' => $sourceUrl]); }
+	public function deleteMessage($chat_id, $message_id){ return iNeoTeamBot('deleteMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
+	public function sendChatAction($chat_id, $actionType){ return iNeoTeamBot('sendChatAction', ['chat_id' => $chat_id, 'action' => $actionType]); }
+	public function getChat($chat_id){ return iNeoTeamBot("getChat", ['chat_id' => $chat_id]); }
+	public function getChatMember($chat_id, $user_id){ return iNeoTeamBot('getChatMember', ['chat_id' => $chat_id, 'user_id' => $user_id]); }
+	public function getChatMemberCount($chat_id){ return iNeoTeamBot('getChatMemberCount', ['chat_id' => $chat_id]); }
+	public function unPinMessage($chat_id, $message_id){ return iNeoTeamBot('unpinChatMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
+	public function unPinAllMessages($chat_id){ return iNeoTeamBot('unpinAllChatMessages', ['chat_id' => $chat_id]); }
 	public function SingleInlineUrlKeyboard($text, $url){ return json_encode(['inline_keyboard' => [[['text' => $text, 'url' => $url]]]]); }
 	public function MultiInlineKeyboard($keyboard){ return json_encode(['inline_keyboard' => $keyboard]); }
 	public function SingleNormalKeyboard($text){ return json_encode(['keyboard' => [[['text' => $text]]], 'resize_keyboard' => true]); }
@@ -191,7 +93,156 @@ class Bot{
 	public function InlineLastname(){ return $this->data['callback_query']['message']['chat']['last_name']; }
 	public function InlineUserId(){ return $this->data['callback_query']['message']['chat']['id']; }
 	public function ForwarderId(){ return $this->data['message']['reply_to_message']['forward_from']['id']; }
+	public function LeaveChat($chat_id){ return iNeoTeamBot("leaveChat", ['chat_id' => $chat_id]); }
 	public function version(){ return self::VERSION; }
+	public function copyMessage($to_chat_id, $from_chat_id, $message_id){ 
+		return iNeoTeamBot("copyMessage", ['chat_id' => $to_chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id]);
+	}
+	public function editMessage($chatID, $messageID, $text, $mode = "html", $webPage = true, $button = null){
+		return iNeoTeamBot('editMessageText', [
+			'chat_id' => $chatID,
+			'message_id' => $messageID,
+			'text' => $text,
+			'parse_mode' => $mode,
+			'disable_web_page_preview' => $webPage,
+			'reply_markup' => $button
+		]);
+	}
+	public function editCaption($chatID, $messageID, $caption, $mode = "html", $button = null){
+		return iNeoTeamBot("editMessageCaption", [
+			'chat_id' => $chatID,
+			'message_id' => $messageID,
+			'caption' => $caption,
+			'parse_mode' => $mode,
+			'reply_markup' => $button
+		]);
+	}
+	public function sendMessage($chat_id, $text, $mode = "html", $webPage = true, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendMessage', [
+			'chat_id' => $chat_id,
+			'text' => $text,
+			'parse_mode' => $mode,
+			'disable_web_page_preview' => $webPage,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendPhoto($chat_id, $photo, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendPhoto', [
+			'chat_id' => $chat_id,
+			'photo' => $photo,
+			'caption' => $caption,
+			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendSticker($chat_id, $sticker, $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendSticker', [
+			'chat_id' => $chat_id,
+			'sticker' => $sticker,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendVideo($chat_id, $video, $caption = null, $mode = "html", $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendVideo', [
+			'chat_id' => $chat_id,
+			'video' => $video,
+			'caption' => $caption,
+			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendAudio($chat_id, $audio, $caption = null, $duration = null, $title = null, $performer = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendAudio', [
+			'chat_id' => $chat_id,
+			'audio' => $audio,
+			'caption' => $caption,
+			'duration' => $duration,
+			'title' => $title,
+			'performer' => $performer,
+			'thumb' => $thumb,
+			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendVoice($chat_id, $voice, $caption = null, $duration = null, $mode = "html", $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendVoice', [
+			'chat_id' => $chat_id,
+			'voice' => $voice,
+			'caption' => $caption,
+			'duration' => $duration,
+			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendDocument($chat_id, $document, $caption = null, $thumb = null, $mode = "html", $notification = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot('sendDocument', [
+			'chat_id' => $chat_id,
+			'document' => $document,
+			'caption' => $caption,
+			'thumb' => $thumb,
+			'parse_mode' => $mode,
+			'disable_notification' => $notification,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendLocation($chat_id, $latitude, $longitude, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot("sendLocation", [
+			'chat_id' => $chat_id,
+			'latitude' => $latitude,
+			'longitude' => $longitude,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendVenue($chat_id, $latitude, $longitude, $title = null, $address = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot("sendVenue", [
+			'chat_id' => $chat_id,
+			'latitude' => $latitude,
+			'longitude' => $longitude,
+			'title' => $title,
+			'address' => $address,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content
+		]);
+	}
+	public function sendContact($chat_id, $phone, $first_name, $last_name = null, $replyTo = null, $button = null, $protect_content = false){
+		return iNeoTeamBot("sendContact", [
+			'chat_id' => $chat_id,
+			'phone_number' => $phone,
+			'first_name' => $first_name,
+			'last_name' => $last_name,
+			'reply_to_message_id' => $replyTo,
+			'reply_markup' => $button,
+			'protect_content' => $protect_content,	
+		]);
+	}
+	public function forwardMessage($toChat_id, $fromChat_id, $message_id, $protect_content = false){
+		return iNeoTeamBot('forwardMessage', [
+			'chat_id' => $toChat_id, 'from_chat_id' => $fromChat_id,
+			'message_id' => $message_id, 'protect_content' => $protect_content
+		]);
+	}
 	public function InputMessageType(){
 		if(isset($this->data['message']['text'])){ return self::TEXT; }
 		if(isset($this->data['message']['photo'])){ return self::PHOTO; }
@@ -243,8 +294,11 @@ class Bot{
 			case 'size';
 				$d = $fileId->result->file_size;
 				break;
+			case 'address';
+				return "https://api.telegram.org/file/bot".ACCESS_TOKEN."/".$fileId->result->file_path;
+				break;
 		}
-		return "https://api.telegram.org/file/bot".ACCESS_TOKEN."/".$d;
+		return $d;
 	}
 	public function getFile($fileId){
 		$this->array = get_defined_vars();
@@ -348,27 +402,25 @@ class Bot{
 		if(isset($this->data['callback_query'])){ return self::CALLBACK_QUERY; }
 		if(isset($this->data['inline_query'])){ return self::INLINE_QUERY; }
 	}
-	function AnswerCallBack($callback_id, $text, $alert = false){
-		$output = iNeoTeamBot('answerCallbackQuery', [
+	public function AnswerCallBack($callback_id, $text, $alert = false){
+		return iNeoTeamBot('answerCallbackQuery', [
 			'callback_query_id' => $callback_id,
 			'text' => $text,
 			'show_alert' => $alert
 		]);
-		return $output;
 	}
-	function AnswerInlineQuery($inline_query_id, $data){
-		$output = iNeoTeamBot('answerInlineQuery', [
+	public function AnswerInlineQuery($inline_query_id, $data){
+		return iNeoTeamBot('answerInlineQuery', [
 			'cache_time' => 0,
 			'inline_query_id' => $inline_query_id,
 			'result' => json_encode($data)
 		]);
 	}
-	function pinMessage($chat_id, $message_id, $notification = false){
-		$output = iNeoTeamBot('pinChatMessage', [
+	public function pinMessage($chat_id, $message_id, $notification = false){
+		return iNeoTeamBot('pinChatMessage', [
 			'chat_id' => $chat_id,
 			'message_id' => $message_id,
 			'disable_notification' => $notification
 		]);
-		return $output;
 	}
 }
