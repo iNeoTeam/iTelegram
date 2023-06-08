@@ -3,7 +3,7 @@
 	* @author:		Sir.4m1R
 	* @team:		iNeoTeam
 	* @copyright:	2018-2023 (C) iNeoTeam
-	* @version:		1.8.5
+	* @version:		2.0
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
@@ -11,7 +11,9 @@
 **/
 namespace iTelegram;
 class Bot{
-	const VERSION			= '1.8.5';
+	const GITHUB_BASE		= 'https://raw.githubusercontent.com/iNeoTeam/iTelegram/main';
+	const INEOTEAM_BASE		= 'https://ineo-team.ir/dl/iTelegram';
+	const VERSION			= '2.0';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -25,6 +27,45 @@ class Bot{
 	const INLINE_QUERY		= 'inline_query';
 	private $data			= [];
 	private $array			= [];
+	public function version(){ return self::VERSION; }
+	public function get_version($base = "github"){ #base: github or ineoteam
+		if(strtolower($base) == "github"){
+			$base = self::GITHUB_BASE;
+		}elseif(strtolower($base) == "ineoteam"){
+			$base = self::INEOTEAM_BASE;
+		}else{
+			return false;
+		}
+		$cURL = curl_init();
+		curl_setopt($cURL, CURLOPT_URL, "$base/_version.txt");
+		curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($cURL, CURLOPT_SSL_VERIFYPEER, false);
+		$ver = curl_exec($cURL); curl_close($cURL);
+		return str_replace(array("\n", "\t", "\r"), null, $ver);
+	}
+	public function check_update($base = "github"){
+		if(!in_array($base, ['github', 'ineoteam'])){ return false; }
+		$now = self::VERSION;
+		$new = $this->get_version($base);
+		if($now == $new && !empty($new)){
+			return ['new_update' => false, 'type' => "latest"];
+		}else{
+			return ['new_update' => true, 'type' => "released", 'new_version' => $new];
+		}
+	}
+	public function install($base = "github"){
+		if(strtolower($base) == "github"){
+			$url = self::GITHUB_BASE."/iTelegram.php";
+		}elseif(strtolower($base) == "ineoteam"){
+			$url = self::INEOTEAM_BASE."/iTelegram.txt";
+		}else{
+			return false;
+		}
+		$check = $this->check_update($base);
+		if(!$check['new_update']){ return false; }
+		copy($url, "iTelegram.php");
+		return true;
+	}
 	public function __construct(){ $this->data = $this->getUpdate(); }
 	public function getUpdate(){
 		if(empty($this->data)){
@@ -94,7 +135,6 @@ class Bot{
 	public function InlineUserId(){ return $this->data['callback_query']['message']['chat']['id']; }
 	public function ForwarderId(){ return $this->data['message']['reply_to_message']['forward_from']['id']; }
 	public function LeaveChat($chat_id){ return iNeoTeamBot("leaveChat", ['chat_id' => $chat_id]); }
-	public function version(){ return self::VERSION; }
 	public function copyMessage($to_chat_id, $from_chat_id, $message_id){ 
 		return iNeoTeamBot("copyMessage", ['chat_id' => $to_chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id]);
 	}
