@@ -3,7 +3,7 @@
 	* @author:		Sir.4m1R
 	* @team:		iNeoTeam
 	* @copyright:	2018-2023 (C) iNeoTeam
-	* @version:		2.0
+	* @version:		2.3
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
@@ -13,7 +13,7 @@ namespace iTelegram;
 class Bot{
 	const GITHUB_BASE		= 'https://raw.githubusercontent.com/iNeoTeam/iTelegram/main';
 	const INEOTEAM_BASE		= 'https://ineo-team.ir/dl/iTelegram';
-	const VERSION			= '2.0';
+	const VERSION			= '2.3';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -135,6 +135,12 @@ class Bot{
 	public function InlineUserId(){ return $this->data['callback_query']['message']['chat']['id']; }
 	public function ForwarderId(){ return $this->data['message']['reply_to_message']['forward_from']['id']; }
 	public function LeaveChat($chat_id){ return iNeoTeamBot("leaveChat", ['chat_id' => $chat_id]); }
+	public function setBotName($name){ return iNeoTeamBot('setMyName', ['name' => $name]); }
+	public function setBotDescription($description){ return iNeoTeamBot('setMyDescription', ['description' => $description]); }
+	public function setBotAbout($about){ return iNeoTeamBot('setMyShortDescription', ['short_description' => $about]); }
+	public function getBotName(){ return iNeoTeamBot('getMyName'); }
+	public function getBotDescription(){ return iNeoTeamBot('getMyDescription'); }
+	public function getBotAbout(){ return iNeoTeamBot('getMyShortDescription'); }
 	public function copyMessage($to_chat_id, $from_chat_id, $message_id){ 
 		return iNeoTeamBot("copyMessage", ['chat_id' => $to_chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id]);
 	}
