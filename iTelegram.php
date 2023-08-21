@@ -3,7 +3,7 @@
 	* @author:		Sir.4m1R
 	* @team:		iNeoTeam
 	* @copyright:	2018-2023 (C) iNeoTeam
-	* @version:		2.3
+	* @version:		2.4
 	* @telegram:	T.me/iNeoTeam
 	* @website:		iNeo-Team.ir
 	* @github:		github.com/iNeoTeam/iTelegram
@@ -13,7 +13,7 @@ namespace iTelegram;
 class Bot{
 	const GITHUB_BASE		= 'https://raw.githubusercontent.com/iNeoTeam/iTelegram/main';
 	const INEOTEAM_BASE		= 'https://ineo-team.ir/dl/iTelegram';
-	const VERSION			= '2.3';
+	const VERSION			= '2.4';
 	const TEXT				= 'text';
 	const PHOTO				= 'photo';
 	const VIDEO				= 'video';
@@ -100,7 +100,7 @@ class Bot{
 	public function TelegramAPI($method, $parameters = []){ return iNeoTeamBot($method, $parameters); }
 	public function getMe(){ return iNeoTeamBot('getMe'); }
 	public function getWebHookInfo(){ return iNeoTeamBot("getWebHookInfo"); }
-	public function deleteWebHook($sourceUrl){ return iNeoTeamBot('deleteWebHook', ['url' => $sourceUrl]); }
+	public function deleteWebHook(){ return iNeoTeamBot('deleteWebHook'); }
 	public function setWebHook($sourceUrl){ return iNeoTeamBot('setWebHook', ['url' => $sourceUrl]); }
 	public function deleteMessage($chat_id, $message_id){ return iNeoTeamBot('deleteMessage', ['chat_id' => $chat_id, 'message_id' => $message_id]); }
 	public function sendChatAction($chat_id, $actionType){ return iNeoTeamBot('sendChatAction', ['chat_id' => $chat_id, 'action' => $actionType]); }
